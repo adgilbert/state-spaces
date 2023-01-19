@@ -1,0 +1,35 @@
+[project]
+name = "statespaces"
+version = "3.0"
+description = "S4 models"
+requires-python = ">=3.7"
+
+dependencies = [
+    "numpy",
+    "scipy",
+    "pandas",
+    "sklearn",
+    "matplotlib",
+    "tqdm",
+    "rich",
+    "pytorch-lightning==1.5.10",
+    "hydra-core",
+    "omegaconf",
+    "wandb",
+    "einops",
+    "opt_einsum",
+    "cmake",
+    "pykeops",
+    "transformers",
+    "datasets",
+]
+
+
+[build-system]
+requires = [
+    "setuptools >= 46.4.0",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"statespaces" = "src/statespaces"}
