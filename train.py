@@ -1,32 +1,28 @@
-import copy
 import os
 import random
 import time
-from functools import partial, wraps
-from typing import Callable, List, Optional
+from functools import wraps
+from typing import Callable, List
 
 import hydra
-import numpy as np
 import pytorch_lightning as pl
 import torch
-import torch.nn as nn
 import wandb
-from hydra.utils import get_original_cwd
-from omegaconf import DictConfig, OmegaConf
+from omegaconf import OmegaConf
 from pytorch_lightning.loggers import WandbLogger
 from pytorch_lightning.utilities import rank_zero_only, rank_zero_warn
-from tqdm.auto import tqdm
 
-import src.models.nn.utils as U
-import src.utils as utils
-import src.utils.train
-from src.dataloaders import SequenceDataset  # TODO make registry
-from src.tasks import decoders, encoders, tasks
-from src.utils import registry
-from src.utils.optim.ema import build_ema_optimizer
-from src.utils.optim_groups import add_optimizer_hooks
+import statespaces.models.nn.utils as U
+import statespaces.utils as utils
+import statespaces.utils.train
+from statespaces.dataloaders import SequenceDataset  # TODO make registry
+from statespaces.tasks import tasks
+from statespaces.tasks import encoders, decoders
+from statespaces.utils import registry
+from statespaces.utils.optim.ema import build_ema_optimizer
+from statespaces.utils.optim_groups import add_optimizer_hooks
 
-log = src.utils.train.get_logger(__name__)
+log = statespaces.utils.train.get_logger(__name__)
 
 # Turn on TensorFloat32 (speeds up large model training substantially)
 import torch.backends
